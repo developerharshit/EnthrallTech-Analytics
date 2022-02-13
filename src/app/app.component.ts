@@ -11,7 +11,7 @@ import * as moment from 'moment';
 export class AppComponent {
 	
     constructor(public chartService: ChartService){
-        console.log(moment('2021-01-07').isSameOrBefore(moment('2021-01-31')));
+        
     }
 	
     filters: Filters = {

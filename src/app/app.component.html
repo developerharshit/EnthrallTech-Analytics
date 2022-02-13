@@ -6,5 +6,8 @@
     (filterChange)="setFilters($any($event))"
   >
   </app-controls>
-  <app-charts [dataForChart]="chartData"></app-charts>
+  <app-charts
+    *ngIf="chartData.data.datasets.length"
+    [dataForChart]="chartData"
+  ></app-charts>
 </div>
