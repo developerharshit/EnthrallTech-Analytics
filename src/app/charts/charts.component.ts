@@ -1,6 +1,7 @@
 import { Component, Input,  OnChanges } from '@angular/core';
 import { Chart,registerables } from 'chart.js';
 import * as moment from 'moment'
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 @Component({
   selector: 'app-charts',
@@ -13,40 +14,44 @@ export class ChartsComponent implements OnChanges {
     Chart.register(...registerables);
   }
 
-  @Input() dataForChart:any = {labels: [], datasets: []}
+  @Input() dataForChart:any = {}
     myChart: any 
 
 
     ngOnChanges() {
-        console.log("OnChanges");
         if (this.myChart) {
             this.myChart.destroy()
         }
-    
+        console.log(this.dataForChart);
+       
         this.myChart = new Chart('myChart', {
-            type: 'line',
-            data: this.dataForChart,
+            type: this.dataForChart.type,
+            data: this.dataForChart.data,
+            plugins: [ChartDataLabels],
             options: {
+                responsive: true,
+                indexAxis: this.dataForChart.horizotal && 'y',
+                maintainAspectRatio: this.dataForChart.type !== 'pie' ,
                 scales: {
                     y: {
                         title: {
-                            display: true, text: 'Number of Active Users',
+                            display: true, text: this.dataForChart.tickY,
                             font: {
                                 size: 20,
                                 weight: '25'
-                            }
+                            },
                         },
-                        beginAtZero: true,
                         ticks: {
                             font: {
                                 size: 15,
                                 weight: '25'
                             },
+                            
                         }
                     },
                     x: {
                         title: {
-                            display: true, text: 'Time',
+                            display: true, text: this.dataForChart.tickX,
                             font: {
                                 size: 20,
                                 weight: '25'
@@ -76,11 +81,11 @@ export class ChartsComponent implements OnChanges {
                                 weight: '25'
                             },
                         },
-                        position: 'bottom'
+                        position: 'top'
                     },
                     title: {
                         display: true,
-                        text: 'User Trend for Active Users',
+                        text: this.dataForChart.title,
                         font: {
                             size: 18,
                             weight: '25'

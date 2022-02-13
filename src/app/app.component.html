@@ -1,5 +1,10 @@
 <div class="ui box">
   <router-outlet></router-outlet>
-  <app-controls (submitted)="processData($any($event))"></app-controls>
+  <app-controls
+    (submitted)="processData($any($event))"
+    [controlPanelData]="controlPanelData"
+    (filterChange)="setFilters($any($event))"
+  >
+  </app-controls>
   <app-charts [dataForChart]="chartData"></app-charts>
 </div>

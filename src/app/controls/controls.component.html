@@ -17,86 +17,96 @@
         </div>
         <div class="field">
           <label>Chart</label>
-          <select class="ui fluid search dropdown" name="chart">
-            <option value="0">Select Chart</option>
-            <option value="1">Growth Chart</option>
-            <option value="2">Period Return Chart</option>
-            <option value="3">Box Chart</option>
-            <option value="4">Risk Return Chart</option>
-            <option value="5">Rolling Return Chart</option>
-            <option value="6">Snail Trail Chart</option>
-            <option value="7">Tracking Error Chart</option>
-            <option value="8">Nominal IR</option>
+          <select
+            class="ui fluid search dropdown"
+            name="chart"
+            [value]="filters.chartType"
+            (change)="setFilters($any($event).target.value, 'chartType')"
+          >
+            <option *ngFor="let chart of chartTypes" [value]="chart">
+              {{ chart }}
+            </option>
           </select>
         </div>
         <div class="field">
           <label>Start Date</label>
           <input
             autoComplete="no"
+            [value]="filters.startDate"
             type="date"
+            [min]="controlPanelData.minDate"
+            [max]="controlPanelData.maxDate"
             name="start"
             placeholder="Start Date"
-            defaultValue="2020-01-31"
+            (change)="setFilters($any($event).target.value, 'startDate')"
           />
         </div>
         <div class="field">
           <label>End Date</label>
           <input
+            [value]="filters.endDate"
             autoComplete="no"
+            [min]="controlPanelData.minDate"
+            [max]="controlPanelData.maxDate"
             type="date"
             name="end"
             placeholder="End Date"
-            defaultValue="2021-01-31"
+            (change)="setFilters($any($event).target.value, 'endDate')"
           />
         </div>
       </div>
       <div class="three fields">
         <div class="field">
           <label>Region</label>
-          <select class="ui fluid search dropdown" name="chart">
-            <option value="0">Select Region</option>
-            <option value="1">Growth Chart</option>
-            <option value="2">Period Return Chart</option>
-            <option value="3">Box Chart</option>
-            <option value="4">Risk Return Chart</option>
-            <option value="5">Rolling Return Chart</option>
-            <option value="6">Snail Trail Chart</option>
-            <option value="7">Tracking Error Chart</option>
-            <option value="8">Nominal IR</option>
+          <select
+            [value]="filters.region"
+            class="ui fluid search dropdown"
+            name="chart"
+            (change)="setFilters($any($event).target.value, 'region')"
+          >
+            <option
+              *ngFor="let region of controlPanelData.region"
+              [value]="region"
+            >
+              {{ region }}
+            </option>
           </select>
         </div>
 
         <div class="field">
           <label>Department</label>
-          <select class="ui fluid search dropdown" name="chart">
-            <option value="0">Select Department</option>
-            <option value="1">Growth Chart</option>
-            <option value="2">Period Return Chart</option>
-            <option value="3">Box Chart</option>
-            <option value="4">Risk Return Chart</option>
-            <option value="5">Rolling Return Chart</option>
-            <option value="6">Snail Trail Chart</option>
-            <option value="7">Tracking Error Chart</option>
-            <option value="8">Nominal IR</option>
+          <select
+            [value]="filters.department"
+            class="ui fluid search dropdown"
+            name="chart"
+            (change)="setFilters($any($event).target.value, 'department')"
+          >
+            <option
+              *ngFor="let department of controlPanelData.department"
+              [value]="department"
+            >
+              {{ department }}
+            </option>
           </select>
         </div>
 
         <div class="field">
           <label>Device</label>
-          <select class="ui fluid search dropdown" name="chart">
-            <option value="0">Select Device</option>
-            <option value="1">Growth Chart</option>
-            <option value="2">Period Return Chart</option>
-            <option value="3">Box Chart</option>
-            <option value="4">Risk Return Chart</option>
-            <option value="5">Rolling Return Chart</option>
-            <option value="6">Snail Trail Chart</option>
-            <option value="7">Tracking Error Chart</option>
-            <option value="8">Nominal IR</option>
+          <select
+            [value]="filters.device"
+            class="ui fluid search dropdown"
+            name="chart"
+            (change)="setFilters($any($event).target.value, 'device')"
+          >
+            <option
+              *ngFor="let device of controlPanelData.device"
+              [value]="device"
+            >
+              {{ device }}
+            </option>
           </select>
         </div>
       </div>
-      <div class="ui button primary">Submit Order</div>
     </form>
   </div>
 </div>
