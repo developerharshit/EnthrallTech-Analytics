@@ -19,5 +19,7 @@ export const chartTypes: string[] =  [
     'Active Users Trend',
     'Region Wise Active User',
     'Mobile vs Web',
-    'Department Wise Active User'
+    'Department Wise Active User',
+    'Trainer Utilization',
+    'Training ThroughPut'
 ]

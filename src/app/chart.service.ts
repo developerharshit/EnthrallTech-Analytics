@@ -66,6 +66,33 @@ export class ChartService {
         return result
     }
 
+    utilizationTime(filters: Filters) {
+        if(!this.rawData) throw new Error('Please select a file')
+        const result:any = {}
+        const data = this.filterData(filters);
+        
+        for (let index = 0; index < 8; index++) {
+            const element: any = data[index];
+            result[element['TrainerName']] = (element['TrainerUtilization']*100).toFixed(0)
+        }
+
+        return result
+    }
+
+    
+    trainerThroughput(filters: Filters) {
+        if(!this.rawData) throw new Error('Please select a file')
+        const result:any = {}
+        const data = this.filterData(filters);
+        
+        for (let index = 0; index < 8; index++) {
+            const element: any = data[index];
+            result[element['TrainerName']] = (element['TrainingThroughPut']*100).toFixed(0)
+        }
+
+        return result
+    }
+
     mobileVsWebChart(filters: Filters){
         if(!this.rawData) throw new Error('Please select a file')
 

@@ -54,6 +54,12 @@ export class AppComponent {
             case chartTypes[3]: // Department Wise Active User
                 this.departmentWiseChart()
                 break;
+            case chartTypes[4]: // Utilization Time
+                this.utilizationTime()
+                break
+            case chartTypes[5]: // Throughput Time
+                this.trainerThroughput()
+                break
         }
     }
     
@@ -66,6 +72,7 @@ export class AppComponent {
 
     userTrendChart = () => {
         const data = this.chartService.userTrendChart(this.filters)
+        console.log(data);
         
 		let x = {
             label: '# of active users',
@@ -93,10 +100,88 @@ export class AppComponent {
         }
         
     }
-    
-    newUserVsOldUserChart = () => {
-        throw new Error('not  = i =>mplemented.');
+
+    utilizationTime() {
+        const data = this.chartService.utilizationTime(this.filters)
+        console.log(data);
+
+        let x = {
+            label: '# of active users',
+			fill: false,
+			backgroundColor: '#269f64',
+			borderColor: '#269f6480',
+			data: Object.values(data),
+			pointRadius: 2,
+			pointHoverRadius: 5,
+			tension: 0.2,
+            datalabels: {
+                color: 'black',
+                labels: {
+                    title: {
+                      font: {
+                        size: 15,  
+                      }
+                    },
+                },
+                anchor: 'end',
+                align: 'end'
+            }
+		}
+        const chartData:any = { datasets: [], labels: [], }
+        chartData.datasets.push(x)
+        chartData.labels = Object.keys(data)
+        
+        this.chartData = {
+            type: 'bar', 
+            data: chartData,
+            title: this.filters.chartType, 
+            horizotal: true, 
+            tickX: 'Trainer Utilization in %', 
+            tickY: 'Trainer Name'
+        }
     }
+
+    
+    trainerThroughput() {
+        const data = this.chartService.trainerThroughput(this.filters)
+        console.log(data);
+
+        let x = {
+            label: '# of active users',
+			fill: false,
+			backgroundColor: '#269f64',
+			borderColor: '#269f6480',
+			data: Object.values(data),
+			pointRadius: 2,
+			pointHoverRadius: 5,
+			tension: 0.2,
+            datalabels: {
+                color: 'black',
+                labels: {
+                    title: {
+                      font: {
+                        size: 15,  
+                      }
+                    },
+                },
+                anchor: 'end',
+                align: 'end'
+            }
+		}
+        const chartData:any = { datasets: [], labels: [], }
+        chartData.datasets.push(x)
+        chartData.labels = Object.keys(data)
+        
+        this.chartData = {
+            type: 'bar', 
+            data: chartData,
+            title: this.filters.chartType, 
+            tickX: 'Trainer Name', 
+            tickY: 'Trainer Throughput in %'
+        }
+    }
+
+    
     
     regionWiseChart = () => {
         const data = this.chartService.regionWiseChart(this.filters)
